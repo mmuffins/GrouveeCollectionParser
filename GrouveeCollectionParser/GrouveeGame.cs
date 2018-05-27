@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace GrouveeCollectionParser
 {
+    /// <summary>
+    /// Represents a game and its properties.</summary>  
     public class GrouveeGame
     {
         public List<URLItem> Developers { get; set; }
@@ -54,6 +56,7 @@ namespace GrouveeCollectionParser
             Map(m => m.ReleaseDate).Name("release_date");
             Map(m => m.URL).Name("url");
             Map(m => m.Review).Name("review");
+
 
             Map(m => m.Genres).ConvertUsing(row =>
             {

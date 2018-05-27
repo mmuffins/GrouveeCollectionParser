@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace GrouveeCollectionParser
 {
+    /// <summary>
+    /// Represents a game shelf in a collection.</summary>  
     public class Shelf : URLItem
     {
         [JsonProperty("order")]

@@ -8,8 +8,12 @@ using System.Threading.Tasks;
 
 namespace GrouveeCollectionParser
 {
+    /// <summary>
+    /// Imports and parses a grouvee collection .csv file.</summary>  
     public static class GrouveeCollection
     {
+        /// <summary>
+        /// Imports and parses a grouvee collection .csv file.</summary>  
         public async static Task<List<GrouveeGame>> ImportAsync(string FilePath)
         {
             var collection = new List<GrouveeGame>();

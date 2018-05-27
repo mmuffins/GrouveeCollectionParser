@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace GrouveeCollectionParser
 {
+    /// <summary>
+    /// A status update for a game.</summary>  
     public class GrouveeStatus : URLItem
     {
-
         public override string Name
         {
             get => Date.ToShortDateString();

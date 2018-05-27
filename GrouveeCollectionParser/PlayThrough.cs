@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace GrouveeCollectionParser
 {
+    /// <summary>
+    /// Represents a playthrough or general play time.</summary>  
     public class Playthrough
     {
         public string Name
