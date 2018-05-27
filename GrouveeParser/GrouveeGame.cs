@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GrouveeParser
 {
-    public class Class1
+    public class GrouveeGame
     {
     }
 }
