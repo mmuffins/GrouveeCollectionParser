@@ -38,7 +38,7 @@ namespace GrouveeCollectionParser
 
         public string URL { get; set; }
 
-        public List<PlayedDate> Dates { get; set; }
+        public List<Playthrough> Playthroughs { get; set; }
 
         public List<GrouveeStatus> Statuses { get; set; }
     }
@@ -108,19 +108,19 @@ namespace GrouveeCollectionParser
 
             });
 
-            Map(m => m.Dates).ConvertUsing(row =>
+            Map(m => m.Playthroughs).ConvertUsing(row =>
             {
                 string value = row.GetField("dates");
                 if (value == "[]")
                 {
-                    return new List<PlayedDate>();
+                    return new List<Playthrough>();
                 }
 
                 var jTokens = JArray.Parse(value);
 
                 var result = jTokens.Select(x =>
                 {
-                    return new PlayedDate(x.Value<String>("level_of_completion"), x.Value<long>("seconds_played"), x.Value<String>("date_started"), x.Value<String>("date_finished"));
+                    return new Playthrough(x.Value<String>("level_of_completion"), x.Value<long>("seconds_played"), x.Value<String>("date_started"), x.Value<String>("date_finished"));
                 }).ToList();
 
                 return result;

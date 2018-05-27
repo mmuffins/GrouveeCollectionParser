@@ -7,21 +7,23 @@ using System.Threading.Tasks;
 
 namespace GrouveeCollectionParser
 {
-    public enum LevelOfCompletion
+    public class Playthrough
     {
-        NotSet,
-        MainStory,
-        MainStoryPlusExtras,
-        FullyCompleted,
-    }
+        public string Name
+        {
+            get
+            {
+                if (this.DateStarted != null) { return DateStarted.ToString(); }
+                if (!string.IsNullOrEmpty(LevelofCompletion)) { return LevelofCompletion; }
+                return Playtime.ToString();
+            }
+        }
 
-    public class PlayedDate
-    {
         [JsonProperty("level_of_completion", NullValueHandling = NullValueHandling.Ignore)]
-        public LevelOfCompletion LevelofCompletion { get; set; }
+        public string LevelofCompletion { get; set; }
 
         [JsonProperty("seconds_played")]
-        public TimeSpan SecondsPlayed { get; set; }
+        public TimeSpan Playtime { get; set; }
 
         [JsonProperty("date_started")]
         [JsonConverter(typeof(GrouveeDateConverter))]
@@ -31,10 +33,12 @@ namespace GrouveeCollectionParser
         [JsonConverter(typeof(GrouveeDateConverter))]
         public DateTime? DateFinished { get; set; }
 
-        public PlayedDate() { }
+        public Playthrough() { }
 
-        public PlayedDate(string LevelofCompletion, long SecondsPlayed, string DateStarted, string DateFinished)
+        public Playthrough(string LevelofCompletion, long SecondsPlayed, string DateStarted, string DateFinished)
         {
+            this.LevelofCompletion = LevelofCompletion;
+
             if (DateTime.TryParse(DateStarted, out DateTime dateStartedParsed))
             {
                 this.DateStarted = dateStartedParsed;
@@ -45,28 +49,11 @@ namespace GrouveeCollectionParser
                 this.DateFinished = DateFinishedParsed;
             }
 
-            switch (LevelofCompletion)
-            {
-                case "100% Completion":
-                    this.LevelofCompletion = LevelOfCompletion.FullyCompleted;
-                    break;
-                case "Main Story":
-                    this.LevelofCompletion = LevelOfCompletion.MainStory;
-                    break;
-                case "Main Story + Extras":
-                    this.LevelofCompletion = LevelOfCompletion.MainStoryPlusExtras;
-                    break;
-                case "null":
-                default:
-                    this.LevelofCompletion = LevelOfCompletion.NotSet;
-                    break;
-            }
-
             // Incorrect entries can result in playtimes higher than the int max, 
             // we therefore need to cast accordingly
             long hours = SecondsPlayed / 3600;
             long restSeconds = SecondsPlayed - (hours * 3600);
-            this.SecondsPlayed = new TimeSpan((int)hours, 0, (int)restSeconds);
+            this.Playtime = new TimeSpan((int)hours, 0, (int)restSeconds);
         }
     }
 
@@ -105,5 +92,4 @@ namespace GrouveeCollectionParser
             return true;
         }
     }
-
 }
