@@ -8,7 +8,7 @@ namespace GrouveeParser
 {
     public class GrouveeCollection
     {
-        public Task ImportAsync(string FilePath)
+        public static Task<GrouveeCollection> ImportAsync(string FilePath)
         {
 
         }
