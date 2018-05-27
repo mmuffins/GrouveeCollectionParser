@@ -9,6 +9,12 @@ namespace GrouveeCollectionParser
 {
     public class GrouveeStatus
     {
+
+        public string Name
+        {
+            get => Date.ToShortDateString();
+        }
+
         [JsonProperty("status")]
         public string Status { get; set; }
 
