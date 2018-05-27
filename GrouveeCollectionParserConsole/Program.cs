@@ -16,7 +16,7 @@ namespace GrouveeCollectionParserConsole
 
         static async Task ImportCollection()
         {
-            GrouveeCollection grouveeCollection = await GrouveeCollection.ImportAsync(@"");
+            var grouveeCollection = await GrouveeCollection.ImportAsync(@"");
         }
     }
 }

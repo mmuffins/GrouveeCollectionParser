@@ -8,30 +8,11 @@ using System.Threading.Tasks;
 
 namespace GrouveeCollectionParser
 {
-    public class GrouveeCollection
+    public static class GrouveeCollection
     {
-
-        public List<GrouveeGame> Games { get; set; }
-
-        public GrouveeGame this[int index]
+        public async static Task<List<GrouveeGame>> ImportAsync(string FilePath)
         {
-            get => Games[index];
-            set => Games[index] = value;
-        }
-
-        public GrouveeCollection()
-        {
-            Games = new List<GrouveeGame>();
-        }
-
-        public void AddGame(GrouveeGame game)
-        {
-            Games.Add(game);
-        }
-
-        public async static Task<GrouveeCollection> ImportAsync(string FilePath)
-        {
-            var collection = new GrouveeCollection();
+            var collection = new List<GrouveeGame>();
             using (var fileStream = new FileStream(FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var streamReader = new StreamReader(fileStream))
             {
@@ -45,9 +26,8 @@ namespace GrouveeCollectionParser
                 //var field = csv.GetField(0);
                 while(await csv.ReadAsync()){
                     var game = csv.GetRecord<GrouveeGame>();
-                    collection.AddGame(game);
+                    collection.Add(game);
                 }
-
             }
 
             return collection;
