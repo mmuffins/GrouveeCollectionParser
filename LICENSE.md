@@ -28,6 +28,6 @@ Newtonsoft.Json https://www.newtonsoft.com/json
 Copyright (c) 2007 James Newton-King
 License (MIT) https://raw.githubusercontent.com/JamesNK/Newtonsoft.Json/master/LICENSE.md
 
-CsvHelper https://github.com/JoshClose/CsvHelper
+CsvHelper https://joshclose.github.io/CsvHelper/
 Copyright (c) Josh Close
 Dual licensing under MS-PL and Apache 2.0 (https://raw.githubusercontent.com/JoshClose/CsvHelper/master/LICENSE.txt)
