@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrouveeParser", "GrouveeParser\GrouveeParser.csproj", "{3C3265FF-FA29-498B-9F46-B350EBF8C209}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrouveeCollectionParser", "GrouveeCollectionParser\GrouveeCollectionParser.csproj", "{3C3265FF-FA29-498B-9F46-B350EBF8C209}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrouveeParserConsole", "GrouveeParserConsole\GrouveeParserConsole.csproj", "{AB1567BA-DF21-4050-A33A-8C80068A1C18}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrouveeCollectionParserConsole", "GrouveeCollectionParserConsole\GrouveeCollectionParserConsole.csproj", "{AB1567BA-DF21-4050-A33A-8C80068A1C18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

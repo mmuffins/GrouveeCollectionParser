@@ -1,11 +1,11 @@
-﻿using GrouveeParser;
+﻿using GrouveeCollectionParser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GrouveeParserConsole
+namespace GrouveeCollectionParserConsole
 {
     class Program
     {
@@ -17,7 +17,6 @@ namespace GrouveeParserConsole
         static async Task ImportCollection()
         {
             GrouveeCollection grouveeCollection = await GrouveeCollection.ImportAsync(@"");
-
         }
     }
 }

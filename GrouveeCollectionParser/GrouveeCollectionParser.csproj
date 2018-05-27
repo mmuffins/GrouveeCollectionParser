@@ -7,8 +7,8 @@
     <ProjectGuid>{3C3265FF-FA29-498B-9F46-B350EBF8C209}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GrouveeParser</RootNamespace>
-    <AssemblyName>GrouveeParser</AssemblyName>
+    <RootNamespace>GrouveeCollectionParser</RootNamespace>
+    <AssemblyName>GrouveeCollectionParser</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
