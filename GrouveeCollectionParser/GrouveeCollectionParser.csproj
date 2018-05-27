@@ -46,10 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\GrouveeStatus.cs" />
-    <Compile Include="Classes\PlayThrough.cs" />
-    <Compile Include="Classes\Shelf.cs" />
-    <Compile Include="Classes\URLItem.cs" />
+    <Compile Include="GrouveeStatus.cs" />
+    <Compile Include="PlayThrough.cs" />
+    <Compile Include="Shelf.cs" />
+    <Compile Include="URLItem.cs" />
     <Compile Include="GrouveeCollection.cs" />
     <Compile Include="GrouveeGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

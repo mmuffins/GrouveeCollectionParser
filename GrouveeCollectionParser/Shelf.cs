@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace GrouveeCollectionParser
 {
-    public class URLItem
+    public class Shelf : URLItem
     {
-        public string Name { get; set; }
+        [JsonProperty("order")]
+        public int Order { get; set; }
 
-        [JsonProperty("url")]
-        public string Url { get; set; }
+        [JsonProperty("date_added")]
+        public DateTime DateAdded { get; set; }
     }
+
 }
