@@ -1,6 +1,7 @@
+
 The MIT License (MIT)
 
-Copyright (c) Michael Kellner 2018 
+Copyright (c) 2018 Michael Kellner
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -31,3 +32,4 @@ License (MIT) https://raw.githubusercontent.com/JamesNK/Newtonsoft.Json/master/L
 CsvHelper https://joshclose.github.io/CsvHelper/
 Copyright (c) Josh Close
 Dual licensing under MS-PL and Apache 2.0 (https://raw.githubusercontent.com/JoshClose/CsvHelper/master/LICENSE.txt)
+
