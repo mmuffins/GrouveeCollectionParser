@@ -14,11 +14,11 @@ namespace GrouveeCollectionParser
     /// Represents a game and its properties.</summary>  
     public class GrouveeGame
     {
-        public List<URLItem> Developers { get; set; }
+        public List<URLItem> Developers { get; private set; }
 
-        public List<URLItem> Franchises { get; set; }
+        public List<URLItem> Franchises { get; private set; }
 
-        public List<URLItem> Genres { get; set; }
+        public List<URLItem> Genres { get; private set; }
 
         public string GiantBombId { get; set; }
 
@@ -26,9 +26,9 @@ namespace GrouveeCollectionParser
 
         public string Name { get; set; }
 
-        public List<URLItem> Platforms { get; set; }
+        public List<URLItem> Platforms { get; private set; }
 
-        public List<URLItem> Publishers { get; set; }
+        public List<URLItem> Publishers { get; private set; }
 
         public int? Rating { get; set; }
 
@@ -40,112 +40,125 @@ namespace GrouveeCollectionParser
 
         public string URL { get; set; }
 
-        public List<Playthrough> Playthroughs { get; set; }
+        public List<Playthrough> Playthroughs { get; private set; }
 
-        public List<GrouveeStatus> Statuses { get; set; }
-    }
+        public List<GrouveeStatus> Statuses { get; private set; }
 
-    public class GrouveeGameMap : ClassMap<GrouveeGame>
-    {
-        public GrouveeGameMap()
+        public GrouveeGame()
         {
-            Map(m => m.Id).Name("id");
-            Map(m => m.GiantBombId).Name("giantbomb_id");
-            Map(m => m.Name).Name("name");
-            Map(m => m.Rating).Name("rating");
-            Map(m => m.ReleaseDate).Name("release_date");
-            Map(m => m.URL).Name("url");
-            Map(m => m.Review).Name("review");
+            this.Developers = new List<URLItem>();
+            this.Franchises = new List<URLItem>();
+            this.Genres = new List<URLItem>();
+            this.Platforms = new List<URLItem>();
+            this.Publishers = new List<URLItem>();
+            this.Shelves = new List<Shelf>();
+            this.Playthroughs = new List<Playthrough>();
+            this.Statuses = new List<GrouveeStatus>();
+        }
 
-
-            Map(m => m.Genres).ConvertUsing(row =>
+        public class GrouveeGameMap : ClassMap<GrouveeGame>
+        {
+            public GrouveeGameMap()
             {
-                // The field is provided as list of properties in the format of
-                // {[Key1] : {url: [value1]}, [KeyN] : {url: [valueN]}}
-                // To get it, get the field contents as json string, deserialize
-                // the string to an dictonary, and create items from the dictionary items
-                string value = row.GetField("genres");
+                Map(m => m.Id).Name("id");
+                Map(m => m.GiantBombId).Name("giantbomb_id");
+                Map(m => m.Name).Name("name");
+                Map(m => m.Rating).Name("rating");
+                Map(m => m.ReleaseDate).Name("release_date");
+                Map(m => m.URL).Name("url");
+                Map(m => m.Review).Name("review");
 
-                return JsonConvert.DeserializeObject<Dictionary<string, JObject>>(value)
-                    .Select(x => new URLItem() { Name = x.Key, Url = x.Value["url"].Value<string>() })
-                    .ToList();
-            });
 
-            Map(m => m.Franchises).ConvertUsing(row =>
-            {
-                string value = row.GetField("franchises");
-                return JsonConvert.DeserializeObject<Dictionary<string, JObject>>(value)
-                    .Select(x => new URLItem() { Name = x.Key, Url = x.Value["url"].Value<string>() })
-                    .ToList();
-            });
+                Map(m => m.Genres).ConvertUsing(row =>
+                {
+                    // The field is provided as list of properties in the format of
+                    // {[Key1] : {url: [value1]}, [KeyN] : {url: [valueN]}}
+                    // To get it, get the field contents as json string, deserialize
+                    // the string to an dictonary, and create items from the dictionary items
+                    string value = row.GetField("genres");
 
-            Map(m => m.Developers).ConvertUsing(row =>
-            {
-                string value = row.GetField("developers");
-                return JsonConvert.DeserializeObject<Dictionary<string, JObject>>(value)
-                    .Select(x => new URLItem() { Name = x.Key, Url = x.Value["url"].Value<string>() })
-                    .ToList();
-            });
+                    return JsonConvert.DeserializeObject<Dictionary<string, JObject>>(value)
+                        .Select(x => new URLItem() { Name = x.Key, Url = x.Value["url"].Value<string>() })
+                        .ToList();
+                });
 
-            Map(m => m.Publishers).ConvertUsing(row =>
-            {
-                string value = row.GetField("publishers");
-                return JsonConvert.DeserializeObject<Dictionary<string, JObject>>(value)
-                    .Select(x => new URLItem() { Name = x.Key, Url = x.Value["url"].Value<string>() })
-                    .ToList();
-            });
+                Map(m => m.Franchises).ConvertUsing(row =>
+                {
+                    string value = row.GetField("franchises");
+                    return JsonConvert.DeserializeObject<Dictionary<string, JObject>>(value)
+                        .Select(x => new URLItem() { Name = x.Key, Url = x.Value["url"].Value<string>() })
+                        .ToList();
+                });
 
-            Map(m => m.Platforms).ConvertUsing(row =>
-            {
-                string value = row.GetField("platforms");
-                return JsonConvert.DeserializeObject<Dictionary<string, JObject>>(value)
-                    .Select(x => new URLItem() { Name = x.Key, Url = x.Value["url"].Value<string>() })
-                    .ToList();
-            });
+                Map(m => m.Developers).ConvertUsing(row =>
+                {
+                    string value = row.GetField("developers");
+                    return JsonConvert.DeserializeObject<Dictionary<string, JObject>>(value)
+                        .Select(x => new URLItem() { Name = x.Key, Url = x.Value["url"].Value<string>() })
+                        .ToList();
+                });
 
-            Map(m => m.Shelves).ConvertUsing(row =>
-            {
-                string value = row.GetField("shelves");
-                IEnumerable<JToken> jTokens = JObject.Parse(value).Children();
-                return jTokens.Select(x => 
+                Map(m => m.Publishers).ConvertUsing(row =>
+                {
+                    string value = row.GetField("publishers");
+                    return JsonConvert.DeserializeObject<Dictionary<string, JObject>>(value)
+                        .Select(x => new URLItem() { Name = x.Key, Url = x.Value["url"].Value<string>() })
+                        .ToList();
+                });
+
+                Map(m => m.Platforms).ConvertUsing(row =>
+                {
+                    string value = row.GetField("platforms");
+                    return JsonConvert.DeserializeObject<Dictionary<string, JObject>>(value)
+                        .Select(x => new URLItem() { Name = x.Key, Url = x.Value["url"].Value<string>() })
+                        .ToList();
+                });
+
+                Map(m => m.Shelves).ConvertUsing(row =>
+                {
+                    string value = row.GetField("shelves");
+                    IEnumerable<JToken> jTokens = JObject.Parse(value).Children();
+                    return jTokens.Select(x =>
                     {
                         var newShelf = x.First.ToObject<Shelf>();
                         newShelf.Name = x.Path;
                         return newShelf;
                     }).ToList();
 
-            });
+                });
 
-            Map(m => m.Playthroughs).ConvertUsing(row =>
-            {
-                string value = row.GetField("dates");
-                if (value == "[]")
+                Map(m => m.Playthroughs).ConvertUsing(row =>
                 {
-                    return new List<Playthrough>();
-                }
+                    string value = row.GetField("dates");
+                    if (value == "[]")
+                    {
+                        return new List<Playthrough>();
+                    }
 
-                var jTokens = JArray.Parse(value);
+                    var jTokens = JArray.Parse(value);
 
-                var result = jTokens.Select(x =>
+                    var result = jTokens.Select(x =>
+                    {
+                        return new Playthrough(x.Value<String>("level_of_completion"), x.Value<long>("seconds_played"), x.Value<String>("date_started"), x.Value<String>("date_finished"));
+                    }).ToList();
+
+                    return result;
+                });
+
+                Map(m => m.Statuses).ConvertUsing(row =>
                 {
-                    return new Playthrough(x.Value<String>("level_of_completion"), x.Value<long>("seconds_played"), x.Value<String>("date_started"), x.Value<String>("date_finished"));
-                }).ToList();
+                    string value = row.GetField("statuses");
+                    if (value == "[]")
+                    {
+                        return new List<GrouveeStatus>();
+                    }
 
-                return result;
-            });
+                    var jTokens = JArray.Parse(value);
 
-            Map(m => m.Statuses).ConvertUsing(row =>
-            {
-                string value = row.GetField("statuses");
-                if (value == "[]")
-                {
-                    return new List<GrouveeStatus>();
-                }
-
-                var jTokens = JArray.Parse(value);
-
-                return jTokens.Select(x => x.ToObject<GrouveeStatus>()).ToList();
-            });
+                    return jTokens.Select(x => x.ToObject<GrouveeStatus>()).ToList();
+                });
+            }
         }
     }
+
 }

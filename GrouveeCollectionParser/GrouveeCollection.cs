@@ -14,7 +14,7 @@ namespace GrouveeCollectionParser
     {
         /// <summary>
         /// Imports and parses a grouvee collection .csv file.</summary>  
-        public async static Task<List<GrouveeGame>> ImportAsync(string FilePath)
+        public async static Task<IEnumerable<GrouveeGame>> ImportAsync(string FilePath)
         {
             var collection = new List<GrouveeGame>();
             using (var fileStream = new FileStream(FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -23,11 +23,10 @@ namespace GrouveeCollectionParser
                 var csv = new CsvReader(streamReader);
                 csv.Configuration.Delimiter = ",";
                 csv.Configuration.Encoding = Encoding.UTF8;
-                csv.Configuration.RegisterClassMap<GrouveeGameMap>();
+                csv.Configuration.RegisterClassMap<GrouveeGame.GrouveeGameMap>();
 
                 await csv.ReadAsync();
                 csv.ReadHeader();
-                //var field = csv.GetField(0);
                 while(await csv.ReadAsync()){
                     var game = csv.GetRecord<GrouveeGame>();
                     collection.Add(game);
