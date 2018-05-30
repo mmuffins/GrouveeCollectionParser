@@ -1,6 +1,6 @@
 # Grouvee Collection Parser
 
-A simple parser for .csv file generated when exporting a collection from grouvee.com.
+A simple parser for .csv file generated when exporting a collection from grouvee.com. Also avaiable as [NuGet package](https://www.nuget.org/packages/GrouveeCollectionParser).
 
 
 ## Usage examples
