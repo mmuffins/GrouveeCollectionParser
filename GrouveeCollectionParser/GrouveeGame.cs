@@ -12,7 +12,7 @@ namespace GrouveeCollectionParser
 {
     /// <summary>
     /// Represents a game and its properties.</summary>  
-    public class GrouveeGame
+    public class GrouveeGame : IEquatable<GrouveeGame>
     {
         public List<URLItem> Developers { get; private set; }
 
@@ -159,6 +159,33 @@ namespace GrouveeCollectionParser
                 });
             }
         }
-    }
 
+        public bool Equals(GrouveeGame other)
+        {
+            if (other == null)
+                return false;
+
+            if (this.Id == other.Id)
+                return true;
+            else
+                return false;
+        }
+
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+                return false;
+
+            GrouveeGame personObj = obj as GrouveeGame;
+            if (personObj == null)
+                return false;
+            else
+                return Equals(personObj);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+    }
 }
